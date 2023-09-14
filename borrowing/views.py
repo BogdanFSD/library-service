@@ -1,3 +1,5 @@
+import datetime
+
 from rest_framework import viewsets
 
 # Create your views here.
@@ -15,4 +17,4 @@ class BorrowingViewSet(viewsets.ModelViewSet):
         return self.serializer_class
 
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+        serializer.save(user=self.request.user, borrow_date=datetime.date.today())
