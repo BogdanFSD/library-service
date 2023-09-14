@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Borrowing(models.Model):
     borrow_date = models.DateField(auto_now_add=True)
     expected_return = models.DateField()
