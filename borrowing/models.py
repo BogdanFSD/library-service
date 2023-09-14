@@ -12,11 +12,11 @@ class Borrowing(models.Model):
     def validate_borrowing(self):
         if self.expected_return < self.borrow_date:
             raise ValidationError('Expected return date should be after the borrow date.')
-        if self.actual_return and self.expected_return < self.actual_return:
+        if self.actual_return and self.borrow_date < self.actual_return:
             raise ValidationError('Actual return date should be after the borrow date.')
 
     def save(
-            self, force_insert=False, force_update=False, using=None, update_fields=None
+        self, force_insert=False, force_update=False, using=None, update_fields=None
     ):
         self.validate_borrowing()
         return super(Borrowing, self).save(force_insert, force_update, using, update_fields)
