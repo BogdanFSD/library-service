@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework_simplejwt",
     "rest_framework",
+    "django_celery_beat",
     "book",
     "user",
     "borrowing",
