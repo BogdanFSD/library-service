@@ -4,7 +4,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework import viewsets
 
 from borrowing.models import Borrowing
-from borrowing.serializers import BorrowingSerializer, BorrowingListSerializer, BorrowingRetrieveSerializer
+from borrowing.serializers import BorrowingSerializer, BorrowingListSerializer, BorrowingRetrieveSerializer, BorrowingCreateSerializer
 
 
 class BorrowingViewSet(viewsets.ModelViewSet):
@@ -17,6 +17,9 @@ class BorrowingViewSet(viewsets.ModelViewSet):
             return BorrowingListSerializer
         if self.action == "retrieve":
             return BorrowingRetrieveSerializer
+        if self.action == 'create':
+            return BorrowingCreateSerializer
+
         return self.serializer_class
 
     def get_queryset(self):
