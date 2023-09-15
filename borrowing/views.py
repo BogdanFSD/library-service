@@ -13,7 +13,7 @@ from rest_framework.response import Response
 class BorrowingViewSet(viewsets.ModelViewSet):
     queryset = Borrowing.objects.all()
     serializer_class = BorrowingSerializer
-    permission_classes = IsAuthenticated
+    permission_classes = [IsAuthenticated, ]
 
     def get_serializer_class(self):
         if self.action == "list":
@@ -41,7 +41,7 @@ class BorrowingViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(user=self.request.user, borrow_date=datetime.date.today())
 
-    @action(methods=['get'], detail=True, permission_classes=[IsAdminUser],
+    @action(methods=['get'], detail=True, permission_classes=[IsAdminUser, ],
             url_path='return', url_name='return_book')
     def return_book(self, request, pk=None):
         """Endpoint for returning book, if book is already returned, return appropriate message"""
