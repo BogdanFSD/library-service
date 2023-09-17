@@ -6,6 +6,6 @@ from payment.views import PaymentViewSet
 app_name = 'payment'
 
 router = DefaultRouter()
-router.register('payments', PaymentViewSet)
+router.register('', PaymentViewSet)
 
 urlpatterns = [path('', include(router.urls))]
