@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     "user",
     "borrowing",
     "payment",
+    "drf_spectacular",
 ]
 
 MIDDLEWARE = [
@@ -145,7 +146,15 @@ SIMPLE_JWT = {
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",
-    )
+    ),
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Library-Service-API',
+    'DESCRIPTION': 'Library Service',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
 }
 
 BOT_TOKEN = os.environ.get('BOT_TOKEN')
