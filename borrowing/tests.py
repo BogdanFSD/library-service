@@ -95,27 +95,27 @@ class TestAdminBorrowingApi(APITestCase):
         book = Book.objects.create(title='test', author='test', cover='SOFT', inventory=10, fee='1.00')
         self.borrowing = Borrowing.objects.create(
             borrow_date=datetime.date.today(),
-            expected_return=datetime.date(2023, 5, 5),
+            expected_return=datetime.date(2023, 10, 10),
             book=book,
             user=user
         )
         self.borrowing2 = Borrowing.objects.create(
             borrow_date=datetime.date.today(),
-            expected_return=datetime.date(2023, 5, 5),
+            expected_return=datetime.date(2023, 10, 10),
             book=book,
             user=user,
-            actual_return=datetime.date(2023, 5, 5)
+            actual_return=datetime.date(2023, 10, 10)
         )
         self.borrowing3 = Borrowing.objects.create(
             borrow_date=datetime.date.today(),
-            expected_return=datetime.date(2023, 5, 5),
+            expected_return=datetime.date(2023, 10, 10),
             book=book,
             user=admin,
-            actual_return=datetime.date(2023, 5, 5)
+            actual_return=datetime.date(2023, 10, 10)
         )
         self.borrowing4 = Borrowing.objects.create(
             borrow_date=datetime.date.today(),
-            expected_return=datetime.date(2023, 5, 5),
+            expected_return=datetime.date(2023, 10, 10),
             book=book,
             user=admin
         )
