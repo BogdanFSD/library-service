@@ -4,13 +4,13 @@ from rest_framework.response import Response
 
 from payment.models import Payment
 from payment.serializers import PaymentSerializer
-
+from .permissions import IsAdminOrOwner
 
 
 class PaymentViewSet(viewsets.ModelViewSet):
     queryset = Payment.objects.select_related('borrowing')
     serializer_class = PaymentSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = (permissions.IsAuthenticated, IsAdminOrOwner,)
 
     def get_queryset(self):
         queryset = self.queryset
