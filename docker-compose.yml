@@ -2,8 +2,7 @@ version: "3"
 
 services:
   app:
-    build:
-      context: .
+    image: library-test2:latest
     ports:
       - "8000:8000"
     volumes:
@@ -27,6 +26,9 @@ services:
 
   redis:
     image: redis:latest
+    restart: always
+    ports:
+      - "6378:6379"
 
   celery_worker:
     build: .
