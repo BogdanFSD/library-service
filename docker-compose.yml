@@ -2,7 +2,7 @@ version: "3"
 
 services:
   app:
-    image: library-test2:latest
+    image: library-test:latest
     ports:
       - "8000:8000"
     volumes:
@@ -25,25 +25,24 @@ services:
       - .env
 
   redis:
-    image: redis:latest
-    restart: always
-    ports:
-      - "6378:6379"
+    image: redis:7.2-alpine
 
   celery_worker:
     build: .
     command: celery -A library worker --loglevel=info
     depends_on:
       - db
+      - app
       - redis
     env_file:
       - .env
 
   celery_beat:
     build: .
-    command: celery -A library beat --loglevel=info
+    command: celery -A library beat -l info --scheduler django_celery_beat.schedulers:DatabaseScheduler
     depends_on:
       - db
+      - app
       - redis
     env_file:
       - .env
