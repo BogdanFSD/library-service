@@ -2,10 +2,7 @@ from django.db import models
 
 
 class Book(models.Model):
-    COVER_CHOICES = (
-        ("HARD", "Hard Cover"),
-        ("SOFT", "Soft Cover")
-    )
+    COVER_CHOICES = (("HARD", "Hard Cover"), ("SOFT", "Soft Cover"))
     title = models.CharField(max_length=255)
     author = models.CharField(max_length=255)
     cover = models.CharField(max_length=4, choices=COVER_CHOICES, default="HARD")

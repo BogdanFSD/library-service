@@ -8,9 +8,12 @@ from .permissions import IsAdminOrOwner
 
 
 class PaymentViewSet(viewsets.ModelViewSet):
-    queryset = Payment.objects.select_related('borrowing')
+    queryset = Payment.objects.select_related("borrowing")
     serializer_class = PaymentSerializer
-    permission_classes = (permissions.IsAuthenticated, IsAdminOrOwner,)
+    permission_classes = (
+        permissions.IsAuthenticated,
+        IsAdminOrOwner,
+    )
 
     def get_queryset(self):
         queryset = self.queryset
@@ -19,13 +22,20 @@ class PaymentViewSet(viewsets.ModelViewSet):
 
         return queryset
 
-    @action(methods=['get'], detail=False, permission_classes=[permissions.AllowAny],
-            url_path='success', url_name='success')
+    @action(
+        methods=["get"],
+        detail=False,
+        permission_classes=[permissions.AllowAny],
+        url_path="success",
+        url_name="success",
+    )
     def payment_success(self, request):
         """Success Payment view, mark payment as paid"""
-        session = request.query_params.get('session_id')
+        session = request.query_params.get("session_id")
         payment = Payment.objects.get(session_id=session)
-        serializer = self.get_serializer_class()(payment, data={'status': 'PAID'}, partial=True)
+        serializer = self.get_serializer_class()(
+            payment, data={"status": "PAID"}, partial=True
+        )
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data, status=200)
